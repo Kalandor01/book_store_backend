@@ -1,0 +1,17 @@
+
+main {
+    width: 70%;
+    max-width: 700px;
+    margin: auto;
+}
+
+td, th {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+.book, .item {
+    border: 1px solid black;
+    padding: 5px;
+}
