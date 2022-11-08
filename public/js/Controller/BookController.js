@@ -4,21 +4,23 @@ import BookModel from "../Model/BookModel.js";
 import BasketController from "../Controller/BasketController.js";
 
 class BookController {
-    #file
+    #endpoint
     #bookModel
     #basket
 
     constructor() {
-        this.#file = "../data.json";
-        this.#bookModel = new BookModel();
+        const token = $('meta[name="csrf-token"]').attr("content");
+        console.log(token);
+        this.#endpoint = "/konyvek";
+        this.#bookModel = new BookModel(token);
         this.#basket = new BasketController();
 
         $("#admin").on("click", ()=>{
-            this.#bookModel.getData(this.#file, this.getBooksAdminData);
+            this.#bookModel.getData(this.#endpoint, this.getBooksAdminData);
         });
         $("#public").on("click", ()=>{
-            // this.#bookModel.getData(this.#file, this.getBooksUserData);
-            this.getBooksUserData(this.#bookModel.getBooks());
+            this.#bookModel.getData(this.#endpoint, this.getBooksUserData);
+            // this.getBooksUserData(this.#bookModel.getBooks());
         });
 
 

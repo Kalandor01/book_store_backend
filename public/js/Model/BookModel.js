@@ -1,8 +1,10 @@
 
 class BookModel {
+    #token
     #booksList;
 
-    constructor() {
+    constructor(token) {
+        this.#token = token;
         this.#booksList = [];
     }
 
@@ -11,12 +13,13 @@ class BookModel {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': this.#token,
             }
         })
             .then((response) => response.json())
             .then((data) => {
                 console.log('Success:', data);
-                this.#booksList = data.konyv;
+                this.#booksList = this.#processBooksData(data);
                 // console.log(this.#booksList);
                 callback(this.#booksList);
             })
@@ -25,22 +28,35 @@ class BookModel {
             });
     }
 
-    setData(endPoint, callback) {
-        fetch(endPoint, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(this.#booksList),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
+    #processBooksData(books) {
+        let pBooks = []
+        books.forEach(book => {
+            pBooks.push({
+                "id":book.id,
+                "title":book.cim,
+                "author":book.szerzo,
+                "price":book.ar
+            })
         });
+        return pBooks
     }
+
+    // setData(endPoint, callback) {
+    //     fetch(endPoint, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(this.#booksList),
+    //     })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //         console.log('Success:', data);
+    //     })
+    //     .catch((error) => {
+    //         console.error('Error:', error);
+    //     });
+    // }
 
     #findBook(bookId) {
         let bookIndex = -1;
