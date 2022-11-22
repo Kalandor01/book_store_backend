@@ -12,10 +12,13 @@ class BasketView {
         this.#itemsDiv = $("#items");
 
         this.#items = [];
-        itemList.forEach((item, x) => {
-            this.#items.push(new ItemView(item, this.#itemsDiv));
-            this.#total += item.price * item.amount;
-        });
+        if(itemList != undefined)
+        {
+            itemList.forEach((item, x) => {
+                this.#items.push(new ItemView(item, this.#itemsDiv));
+                this.#total += item.price * item.amount;
+            });
+        }
 
         parentElem.append(`<div id="itotal"><p>Total: ${this.#total} Ft</p></div>`);
     }
