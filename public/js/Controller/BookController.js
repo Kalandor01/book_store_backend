@@ -11,7 +11,7 @@ class BookController {
     constructor() {
         const token = $('meta[name="csrf-token"]').attr("content");
         console.log(token);
-        this.#endpoint = "/konyvek";
+        this.#endpoint = "/books";
         this.#bookModel = new BookModel(token);
         this.#basket = new BasketController();
 
@@ -32,6 +32,7 @@ class BookController {
 
         $(window).on("finnew", (evt) => {
             this.#bookModel.newBook(evt.detail);
+            this.#bookModel.newData(this.#endpoint, evt.detail);
             //show books
             let books = this.#bookModel.getBooks();
             new BooksAdminView(books, "main");
@@ -45,6 +46,7 @@ class BookController {
 
         $(window).on("finmod", (evt) => {
             this.#bookModel.modBook(evt.detail);
+            this.#bookModel.modData(this.#endpoint + "/" + evt.detail.id, evt.detail);
             //show books
             let books = this.#bookModel.getBooks();
             new BooksAdminView(books, "main");
@@ -59,6 +61,7 @@ class BookController {
 
         $(window).on("del", (evt) => {
             this.#bookModel.delBook(evt.detail);
+            this.#bookModel.delData(this.#endpoint + "/" + evt.detail.id);
             //show books
             let books = this.#bookModel.getBooks();
             new BooksAdminView(books, "main");

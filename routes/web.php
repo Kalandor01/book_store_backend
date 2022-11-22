@@ -22,9 +22,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/konyvek', [KonyvController::class, 'index']);
-Route::post('/konyvek', [KonyvController::class, 'store']);
-Route::put('/konyvek/{id}', [KonyvController::class, 'update']);
-Route::delete('/konyvek/{id}', [KonyvController::class, 'destroy']);
+Route::get('/books', [KonyvController::class, 'index']);
+Route::post('/books', [KonyvController::class, 'store']);
+Route::put('/books/{id}', [KonyvController::class, 'update']);
+Route::delete('/books/{id}', [KonyvController::class, 'destroy']);
 
 require __DIR__ . '/auth.php';

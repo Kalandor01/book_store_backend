@@ -62,7 +62,17 @@ class BooksAdminView {
     }
 
     newBook() {
-        let newBook = new BookAdminView(this.#books[0], this.#tbody, 0)
+        let dummyBook = this.#books[0];
+        if(dummyBook == undefined)
+        {
+            dummyBook = {
+                "id":0,
+                "title":"",
+                "author":"",
+                "price":0
+            }
+        }
+        let newBook = new BookAdminView(dummyBook, this.#tbody, 0);
         newBook.newMode();
     }
 }

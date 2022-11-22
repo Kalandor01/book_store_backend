@@ -9,6 +9,9 @@ class BookAdminView {
     #cancelButton;
 
     constructor(book, pElement, x) {
+        console.log(book);
+        console.log(pElement);
+        console.log(x);
         this.#book = book;
         this.#book.x = x;
         // console.log(this.#book);
@@ -54,7 +57,7 @@ class BookAdminView {
 
     clickFinNewButtonEvent() {
         //prepare data
-        this.#book.id = $(`input[name="id"]`).val();
+        this.#book.id = "new id";
         this.#book.title = $(`input[name="title"]`).val();
         this.#book.author = $(`input[name="author"]`).val();
         this.#book.price = $(`input[name="price"]`).val();
@@ -107,7 +110,7 @@ class BookAdminView {
     newMode() {
         this.#row.empty();
         this.#row.append(`
-        <td><input type="text" name="id"></td>
+        <td>new id</td>
         <td><input type="text" name="title"></td>
         <td><input type="text" name="author"></td>
         <td><input type="number" name="price"></td>
