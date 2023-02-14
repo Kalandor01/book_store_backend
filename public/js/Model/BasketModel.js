@@ -42,7 +42,7 @@ class BasketModel {
             }
             else
             {
-                this.removeItem(fitem);
+                this.removeItem(fitem.id);
             }
         }
     }
